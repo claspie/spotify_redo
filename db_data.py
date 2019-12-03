@@ -10,4 +10,23 @@ mycon = mysql.connect(
     database=db
 )
 
-mycon.close();
+
+def fetch_songs(year, category):
+    cursor = mycon.cursor();
+    query = f"SELECT title, artist FROM {year}_{category};"
+
+    cursor.execute(query);
+    result = cursor.fetchall();
+    table = [];
+    for row in result:
+        results = {
+            "name": row[0].replace("\n", ""),
+            "artist": row[1].replace("\n", "").rsplit(" ")[0],
+            "real_artist": row[1].replace("\n", "")
+        }
+        table.append(results)
+    cursor.close();
+    mycon.close()
+    return table;
+
+print(fetch_songs(2017, "rap"));
