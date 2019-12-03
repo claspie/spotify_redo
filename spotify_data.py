@@ -12,8 +12,6 @@ API_BASE_URL = "https://api.spotify.com"
 API_VERSION = "v1"
 API_URL = f"{API_BASE_URL}/{API_VERSION}"
 
-# token = "BQDJWnCPWxf86xeZOHdJOQu2irg1HbOuUIgt0QNc7WsdJw1k7PQNzJtV0vyXH1Tl9F2yOFOpAdaDw08ElSdYkVj5OD4go6nl2f8qS7AuDVfSVF_EUBmAyGoJ8N0R1GXOJOg4jSaGNV8uNO0w1428rZpcr0rsy16Eawz7hL-nkGkS2reTdAPzP-8KqA7Y6UeZlktCJzuPc9hbQX-BR-wKxxuTQ8d7HTyxXNQDS-4"
-
 
 def profile_data(token):
     user_profile_endpoint = f"{API_URL}/me"
