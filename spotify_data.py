@@ -87,3 +87,6 @@ def add_track(token, playlist_id, songs):
     }
     add_song = post(url, data=payload, headers=headers)
     return "Song added";
+
+def create_uri(songlist):
+    pass
