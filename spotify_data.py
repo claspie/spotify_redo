@@ -49,10 +49,11 @@ def create_playlist(token, user, name, desc):
     data = loads(create.text)
     return data;
 
-def search_track(token, name, number):
+def search_track(token, name, artist, number):
     url = f"{API_URL}/search"
+    artist_name = artist.lower();
     querystring = {
-        "q": name,
+        "q": f"{name} artist:{artist_name}",
         "type": "track",
         "limit": number
     }
@@ -70,3 +71,19 @@ def search_track(token, name, number):
     data = loads(search.text)
     track_uri = data['tracks']['items'][0]['uri']
     return track_uri;
+
+def add_track(token, playlist_id, songs):
+    url = f"{API_URL}/playlists/{playlist_id}/tracks"
+    payload = dumps(songs)
+    headers = {
+    'Content-Type': "application/json",
+    'Authorization': f"Bearer {token}",
+    'Accept': "*/*",
+    'Cache-Control': "no-cache",
+    'Host': "api.spotify.com",
+    'Accept-Encoding': "gzip, deflate",
+    'Connection': "keep-alive",
+    'cache-control': "no-cache"
+    }
+    add_song = post(url, data=payload, headers=headers)
+    return "Song added";
