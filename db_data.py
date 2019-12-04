@@ -28,5 +28,3 @@ def fetch_songs(year, category):
     cursor.close();
     mycon.close()
     return table;
-
-print(fetch_songs(2017, "rap"));

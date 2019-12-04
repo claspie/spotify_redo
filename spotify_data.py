@@ -88,5 +88,28 @@ def add_track(token, playlist_id, songs):
     add_song = post(url, data=payload, headers=headers)
     return "Song added";
 
-def create_uri(songlist):
-    pass
+def create_uri(token, songlist, number):
+    songlist = [
+        {
+            "name": "Moves",
+            "artist": "Big",
+            "real_artist": "Big Sean"
+        },
+        {
+            "name": "Booty",
+            "artist": "Bubba",
+            "real_artist": "Bubba Sparxx"
+        },
+        {
+            "name": "Bedrock",
+            "artist": "Drake",
+            "real_artist": "Lili Wayne"
+        }
+    ]
+    song_uris = {
+        "uris": []
+    }
+    for song in songlist:
+        song_uri = search_track(token, song['name'], song['artist'], number);
+        song_uris['uris'].append(song_uri)
+    return song_uris;

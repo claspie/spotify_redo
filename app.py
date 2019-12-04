@@ -2,7 +2,8 @@ from requests import get, post;
 from flask import request, redirect, jsonify, Flask;
 from json import loads
 from auth import app_auth, auth_token
-from spotify_data import profile_data, create_playlist, search_track, add_track;
+from spotify_data import profile_data, create_playlist, search_track, add_track, create_uri;
+from db_data import fetch_songs;
 
 
 app = Flask(__name__)
@@ -21,9 +22,15 @@ def callback():
     print(access_token)
     profile = profile_data(access_token)
     profile_url = profile['href']
-    # new_playlist = create_playlist(access_token, profile_url, "tester_new", "there you go, a second playlist")
-    # playlist_id = new_playlist['id']
-    ''' uri = search_track(access_token, "Forever", "Drake", 2) '''
+
+    billboard_year = 2006; playlist_desc = "List of billboard top songs from 2006 to 2018";
+    playlist_title = "Top Hot Songs"; category = "hottest";
+
+    new_playlist = create_playlist(access_token, profile_url, playlist_title, playlist_desc)
+    playlist_id = new_playlist['id']
+
+    songlist = fetch_songs(billboard_year, category);
+    uris_list = create_uri(access_token, songlist, 1);
     songs_to_add = {
         "uris": [
             "spotify:track:3ia3dJETSOllPsv3LJkE35",
