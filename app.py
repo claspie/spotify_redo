@@ -26,9 +26,9 @@ def callback():
     billboard_year = 2017; playlist_desc = "List of billboard top rap songs from 2013 to 2017";
     playlist_title = "Top Rap Songs"; category = "rap";
 
-    ''' new_playlist = create_playlist(access_token, profile_url, playlist_title, playlist_desc) '''
-    ''' playlist_id = new_playlist['id'] '''
-    playlist_id = "2q0cCzb42uC7pJjWKSsddR"
+    new_playlist = create_playlist(access_token, profile_url, playlist_title, playlist_desc);
+    playlist_id = new_playlist['id']
+    ''' playlist_id = "" '''
     ''' print("New Playlist created :: ", playlist_id) '''
 
     songlist = fetch_songs(billboard_year, category);
