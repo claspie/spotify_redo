@@ -23,22 +23,25 @@ def callback():
     profile = profile_data(access_token)
     profile_url = profile['href']
 
-    billboard_year = 2006; playlist_desc = "List of billboard top songs from 2006 to 2018";
-    playlist_title = "Top Hot Songs"; category = "hottest";
+    billboard_year = 2017; playlist_desc = "List of billboard top rap songs from 2013 to 2017";
+    playlist_title = "Top Rap Songs"; category = "rap";
 
-    new_playlist = create_playlist(access_token, profile_url, playlist_title, playlist_desc)
-    playlist_id = new_playlist['id']
+    ''' new_playlist = create_playlist(access_token, profile_url, playlist_title, playlist_desc) '''
+    ''' playlist_id = new_playlist['id'] '''
+    playlist_id = "2q0cCzb42uC7pJjWKSsddR"
+    ''' print("New Playlist created :: ", playlist_id) '''
 
     songlist = fetch_songs(billboard_year, category);
-    uris_list = create_uri(access_token, songlist, 1);
-    songs_to_add = {
-        "uris": [
-            "spotify:track:3ia3dJETSOllPsv3LJkE35",
-            "spotify:track:0oVxGuRMnawFgA8aduocfc"
-        ]
-    }
-    add_track(access_token, "0NiaTYnN5s82ktouknDU2U", songs_to_add)
-    return "Songs added";
+    print("Fetched songs from database")
+    uris_list = create_uri(access_token, songlist, 2);
+    print("About to add songs to playlist")
+
+    for uris in uris_list:
+        response = add_track(access_token, playlist_id, uris);
+    
+    # Uncomment the line below and comment the for loop if your sonlist is 100 and less
+    ''' response = add_track(access_token, playlist_id, uris_list) '''
+    return response;
 
 
 app.run(port=8080, debug=True)
